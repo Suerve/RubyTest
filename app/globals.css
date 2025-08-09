@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Rubicon Programs Brand Colors */
+    --rubicon-primary: 203 100% 23%; /* #004875 */
+    --rubicon-secondary: 0 0% 54%; /* #8a8a8d */
+    --rubicon-accent-1: 32 96% 54%; /* #f8951d */
+    --rubicon-accent-2: 32 96% 54%; /* #f8951d */
+
+    /* Base Design System */
+    --background: 0 0% 100%;
+    --foreground: 203 100% 23%;
+    --card: 0 0% 100%;
+    --card-foreground: 203 100% 23%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 203 100% 23%;
+    --primary: 203 100% 23%; /* Rubicon Primary Blue */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 0 0% 54%; /* Rubicon Secondary Gray */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 0 0% 54%;
+    --accent: 32 96% 54%; /* Rubicon Accent Orange */
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 203 100% 23%;
+    --chart-1: 203 100% 23%;
+    --chart-2: 0 0% 54%;
+    --chart-3: 32 96% 54%;
+    --chart-4: 32 96% 54%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 203 100% 8%;
+    --foreground: 210 40% 98%;
+    --card: 203 100% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 203 100% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 32 96% 54%;
+    --primary-foreground: 203 100% 8%;
+    --secondary: 0 0% 54%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 203 50% 15%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 32 96% 54%;
+    --accent-foreground: 203 100% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 203 50% 15%;
+    --input: 203 50% 15%;
+    --ring: 32 96% 54%;
+    --chart-1: 32 96% 54%;
+    --chart-2: 0 0% 54%;
+    --chart-3: 32 96% 54%;
+    --chart-4: 203 100% 23%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .rubicon-primary {
+    @apply text-[#004875];
+  }
+  .bg-rubicon-primary {
+    @apply bg-[#004875];
+  }
+  .rubicon-secondary {
+    @apply text-[#8a8a8d];
+  }
+  .bg-rubicon-secondary {
+    @apply bg-[#8a8a8d];
+  }
+  .rubicon-accent-green {
+    @apply text-[#f8951d];
+  }
+  .bg-rubicon-accent-green {
+    @apply bg-[#f8951d];
+  }
+  .rubicon-accent-orange {
+    @apply text-[#f8951d];
+  }
+  .bg-rubicon-accent-orange {
+    @apply bg-[#f8951d];
+  }
+  .rubicon-gradient {
+    background: linear-gradient(135deg, #004875 0%, #f8951d 100%);
+  }
+}
+
+/* Custom scrollbar */
+@layer base {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/50 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/70;
+  }
+}
+
+/* Animation utilities */
+@layer components {
+  .animate-count-up {
+    animation: countUp 2s ease-out;
+  }
+  
+  @keyframes countUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  @page {
+    margin: 0.5in;
+  }
+  
+  .print-landscape {
+    @page {
+      size: landscape;
+    }
+  }
+  
+  .print-portrait {
+    @page {
+      size: portrait;
+    }
+  }
+}

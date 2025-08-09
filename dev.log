@@ -1,0 +1,32 @@
+yarn run v1.22.22
+warning ../../../../package.json: No license field
+$ next dev
+  ▲ Next.js 14.2.28
+  - Local:        http://localhost:3000
+  - Environments: .env
+  - Experiments (use with caution):
+    · outputFileTracingRoot
+
+ ✓ Starting...
+ ✓ Ready in 2.6s
+ ✓ Compiled /middleware in 245ms (174 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 3.8s (1084 modules)
+ GET / 200 in 4402ms
+ ✓ Compiled in 639ms (409 modules)
+ GET / 200 in 528ms
+ ✓ Compiled /api/auth/[...nextauth] in 335ms (679 modules)
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-tagline.png 302 in 1051ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 1048ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICONPROGRAMS-horizontal.png 302 in 1052ms
+ GET /api/auth/session 200 in 1048ms
+ GET /api/auth/session 200 in 88ms
+ ○ Compiling /auth/signin ...
+ ✓ Compiled /auth/signin in 545ms (1104 modules)
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICONPROGRAMS-horizontal.png 200 in 703ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 703ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-tagline.png 200 in 704ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 50ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 40ms
+ GET /auth/signin 200 in 39ms
+[?25h
