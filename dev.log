@@ -8,25 +8,109 @@ $ next dev
     · outputFileTracingRoot
 
  ✓ Starting...
- ✓ Ready in 2.6s
- ✓ Compiled /middleware in 245ms (174 modules)
+ ✓ Ready in 1494ms
+ ✓ Compiled /middleware in 234ms (174 modules)
  ○ Compiling / ...
- ✓ Compiled / in 3.8s (1084 modules)
- GET / 200 in 4402ms
- ✓ Compiled in 639ms (409 modules)
- GET / 200 in 528ms
- ✓ Compiled /api/auth/[...nextauth] in 335ms (679 modules)
- GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-tagline.png 302 in 1051ms
- GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 1048ms
- GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICONPROGRAMS-horizontal.png 302 in 1052ms
- GET /api/auth/session 200 in 1048ms
- GET /api/auth/session 200 in 88ms
+ ✓ Compiled / in 2.2s (1083 modules)
+ GET / 200 in 2767ms
+ ✓ Compiled in 572ms (409 modules)
+ ✓ Compiled /api/auth/[...nextauth] in 239ms (678 modules)
+ GET /api/auth/signin?callbackUrl=%2Ftests%2Fpractice%2F10-key-practice-test 302 in 702ms
  ○ Compiling /auth/signin ...
- ✓ Compiled /auth/signin in 545ms (1104 modules)
- GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICONPROGRAMS-horizontal.png 200 in 703ms
- GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 703ms
- GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-tagline.png 200 in 704ms
- GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 50ms
- GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 40ms
- GET /auth/signin 200 in 39ms
+ ✓ Compiled /auth/signin in 601ms (1103 modules)
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Ftests%2Fpractice%2F10-key-practice-test 200 in 716ms
+ GET /api/auth/session 200 in 81ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICONPROGRAMS-horizontal.png 302 in 94ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 126ms
+ GET /api/auth/session 200 in 77ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICONPROGRAMS-horizontal.png 200 in 71ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 74ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 43ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 43ms
+ GET /api/auth/signin?callbackUrl=%2Ftest-component 302 in 65ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Ftest-component 200 in 46ms
+ GET /api/auth/session 200 in 58ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICONPROGRAMS-horizontal.png 302 in 68ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 68ms
+ GET /api/auth/session 200 in 41ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICONPROGRAMS-horizontal.png 200 in 58ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 67ms
+ GET /api/auth/session 200 in 48ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 41ms
+ GET /api/auth/session 200 in 49ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 61ms
+ ✓ Compiled in 129ms (174 modules)
+ ✓ Compiled in 136ms (174 modules)
+ ✓ Compiled /_not-found in 354ms (1106 modules)
+ GET /tests/practice/10-key-practice-test 404 in 437ms
+ GET /api/auth/session 200 in 106ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 98ms
+ GET /api/auth/session 200 in 39ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 83ms
+ GET /api/auth/session 200 in 49ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 46ms
+ GET /api/auth/session 200 in 49ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 53ms
+ GET /api/auth/signin?callbackUrl=%2Ftests%2Fpractice%3FtestType%3Dtyping-10key 302 in 55ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Ftests%2Fpractice%3FtestType%3Dtyping-10key 200 in 43ms
+ GET /api/auth/session 200 in 64ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICONPROGRAMS-horizontal.png 302 in 78ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 93ms
+ GET /api/auth/session 200 in 64ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICONPROGRAMS-horizontal.png 200 in 69ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 82ms
+ GET /api/auth/session 200 in 68ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 46ms
+ GET /api/auth/session 200 in 54ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 57ms
+ GET /api/auth/session 200 in 56ms
+ ✓ Compiled in 528ms (424 modules)
+ GET /tests/practice/10-key-practice-test 404 in 17ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 53ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 64ms
+ GET /api/auth/session 200 in 66ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 56ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 113ms
+ GET /api/auth/session 200 in 74ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 74ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 69ms
+ GET /api/auth/session 200 in 58ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 65ms
+ GET /api/auth/session 200 in 60ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 92ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 74ms
+ GET /api/auth/session 200 in 65ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 75ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 72ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 51ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 52ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 43ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 43ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 42ms
+ ✓ Compiled in 953ms (1280 modules)
+ GET /tests/practice/10-key-practice-test 404 in 72ms
+ GET /api/auth/session 200 in 59ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 72ms
+ GET /api/auth/session 200 in 41ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 60ms
+ GET /api/auth/session 200 in 39ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 44ms
+ GET /api/auth/session 200 in 43ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 50ms
+ GET /api/auth/session 200 in 36ms
+ ✓ Compiled in 93ms (174 modules)
+ ✓ Compiled in 89ms (174 modules)
+ ○ Compiling /test-practice ...
+ ✓ Compiled /test-practice in 982ms (1020 modules)
+ GET /test-practice 200 in 1174ms
+ GET /api/auth/session 200 in 91ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 93ms
+ GET /api/auth/session 200 in 48ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 97ms
+ GET /api/auth/session 200 in 80ms
+ GET /api/auth/signin?callbackUrl=%2Fimages%2FRUBICON-sqlogo.png 302 in 52ms
+ GET /api/auth/session 200 in 60ms
+ GET /auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2Fimages%2FRUBICON-sqlogo.png 200 in 64ms
+ GET /api/auth/session 200 in 78ms
+ GET /api/auth/session 200 in 33ms
 [?25h

@@ -15,7 +15,9 @@ export default withAuth(
       pathname.startsWith('/_next/') ||
       pathname.startsWith('/favicon.ico') ||
       pathname === '/restricted-access' ||
-      pathname.startsWith('/test-10key')
+      pathname.startsWith('/test-10key') ||
+      pathname.startsWith('/tests/practice/') ||
+      pathname.startsWith('/test-practice')
     ) {
       return NextResponse.next();
     }
@@ -52,7 +54,9 @@ export default withAuth(
           pathname.startsWith('/favicon.ico') ||
           pathname === '/restricted-access' ||
           pathname === '/request-access' ||
-          pathname.startsWith('/test-10key')
+          pathname.startsWith('/test-10key') ||
+          pathname.startsWith('/tests/practice/') ||
+          pathname.startsWith('/test-practice')
         ) {
           return true;
         }

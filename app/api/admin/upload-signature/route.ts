@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     // Convert file to buffer and save
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    await writeFile(filepath, buffer);
+    await writeFile(filepath, new Uint8Array(buffer));
 
     const imageUrl = `/uploads/signatures/${filename}`;
 

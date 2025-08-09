@@ -112,7 +112,6 @@ function VerticalCharacterDisplay({
   triggerAnimation,
   onAnimationComplete
 }: VerticalDisplayProps) {
-  const [scrollOffset, setScrollOffset] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
   // Handle animation trigger
@@ -120,8 +119,7 @@ function VerticalCharacterDisplay({
     if (triggerAnimation && !isAnimating) {
       setIsAnimating(true);
       
-      // Start animation immediately
-      setScrollOffset(prev => prev + 1);
+      // Don't change scrollOffset here - rows are managed by currentRowIndex
       
       setTimeout(() => {
         setIsAnimating(false);
@@ -131,13 +129,13 @@ function VerticalCharacterDisplay({
     }
   }, [triggerAnimation, isAnimating, onAnimationComplete, onRowComplete]);
 
-  // Get the three visible rows
+  // Get the three visible rows - always show current row in middle
   const getVisibleRows = () => {
-    const startRow = Math.max(0, currentRowIndex - 1 + scrollOffset);
+    const startRow = Math.max(0, currentRowIndex - 1);
     return [
-      rows[startRow] || { content: '', characters: [] },     // Top row
-      rows[startRow + 1] || { content: '', characters: [] }, // Middle row
-      rows[startRow + 2] || { content: '', characters: [] }  // Bottom row
+      rows[startRow] || { content: '', characters: [] },     // Top row (previous)
+      rows[startRow + 1] || { content: '', characters: [] }, // Middle row (current)
+      rows[startRow + 2] || { content: '', characters: [] }  // Bottom row (next)
     ];
   };
 
@@ -146,7 +144,7 @@ function VerticalCharacterDisplay({
 
   // Character validation logic
   const getCharacterStatus = (rowIndex: number, charIndex: number) => {
-    const globalRowIndex = currentRowIndex - 1 + scrollOffset + rowIndex;
+    const globalRowIndex = currentRowIndex - 1 + rowIndex;
     const row = rows[globalRowIndex];
     
     if (!row) return { status: 'pending', char: '' };
@@ -219,7 +217,7 @@ function VerticalCharacterDisplay({
           
           return (
             <div
-              key={`row-${currentRowIndex - 1 + scrollOffset + rowIndex}`}
+              key={`row-${currentRowIndex - 1 + rowIndex}`}
               className={`
                 flex justify-center items-center gap-1 transition-all duration-300 ease-in-out transform
                 ${isMiddleRow ? 'scale-125 z-10' : 'scale-90 opacity-50'}
@@ -594,16 +592,86 @@ export default function PracticeTypingTest({ testType, onComplete, onCancel }: P
     if (timerRef.current) clearInterval(timerRef.current);
     if (statsIntervalRef.current) clearInterval(statsIntervalRef.current);
 
-    // Final statistics calculation
-    calculateStatistics();
+    // Calculate final statistics directly (synchronously)
+    let totalChars = 0;
+    let correctChars = 0;
+    
+    if (testType === '10-key') {
+      // Row-based 10-key calculation based on actual keystrokes in character input box
+      if (testRows.length > 0) {
+        // Count all keystrokes from all entry lines (excluding newlines)
+        const allKeystrokes = allEntryLines.join('').replace(/\n/g, '');
+        totalChars = allKeystrokes.length;
+        
+        // Calculate correct characters by comparing against expected text across all rows
+        correctChars = 0;
+        
+        for (let rowIndex = 0; rowIndex <= Math.min(currentRowIndex, testRows.length - 1); rowIndex++) {
+          const row = testRows[rowIndex];
+          if (!row) continue;
+          
+          const lineContent = allEntryLines[rowIndex] || '';
+          
+          // Count correct characters in this line
+          for (let charIndex = 0; charIndex < Math.min(lineContent.length, row.characters.length); charIndex++) {
+            if (lineContent[charIndex] === row.characters[charIndex]) {
+              correctChars++;
+            }
+          }
+        }
+      }
+    } else {
+      // Traditional keyboard test calculation
+      if (currentContent && typedText) {
+        totalChars = typedText.length;
+        correctChars = typedText.split('').filter((char, index) => char === currentContent[index]).length;
+      }
+    }
+    
+    // Calculate final statistics
+    const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 0;
+    const timeElapsed = 30 - timeRemaining;
+    
+    let wpm, weightedWpm, kph, weightedKph;
+    
+    if (testType === '10-key') {
+      // Calculate KPH (Keystrokes Per Hour) for 10-key practice
+      const elapsedHours = timeElapsed / 3600;
+      kph = (elapsedHours > 0 && totalChars > 0) ? Math.round(totalChars / elapsedHours) : 0;
+      weightedKph = Math.round(kph * (accuracy / 100));
+      
+      // For compatibility, also calculate equivalent WPM (avoid division by zero)
+      wpm = kph > 0 ? Math.round(kph / 12) : 0;
+      weightedWpm = weightedKph > 0 ? Math.round(weightedKph / 12) : 0;
+    } else {
+      // Calculate WPM for keyboard practice
+      const elapsedMinutes = timeElapsed / 60;
+      wpm = (elapsedMinutes > 0 && totalChars > 0) ? Math.round((totalChars / 5) / elapsedMinutes) : 0;
+      weightedWpm = Math.round(wpm * (accuracy / 100));
+      
+      // Convert to approximate KPH
+      kph = Math.round(wpm * 12);
+      weightedKph = Math.round(weightedWpm * 12);
+    }
+
+    const finalStatistics = {
+      wpm: wpm || 0,
+      accuracy: accuracy || 0,
+      weightedWpm: weightedWpm || 0,
+      kph: kph || 0,
+      weightedKph: weightedKph || 0,
+      correctCharacters: correctChars || 0,
+      totalCharacters: totalChars || 0,
+      timeElapsed: timeElapsed || 0
+    };
+
+    // Update statistics state as well
+    setStatistics(finalStatistics);
 
     // Create practice results (no database storage)
     const practiceResults = {
       testType,
-      statistics: {
-        ...statistics,
-        timeElapsed: 30 - timeRemaining
-      },
+      statistics: finalStatistics,
       content: testType === '10-key' ? testRows.map(row => row.content).join('\n') : currentContent,
       typedText: testType === '10-key' ? inputText : typedText,
       isPractice: true,
@@ -620,7 +688,7 @@ export default function PracticeTypingTest({ testType, onComplete, onCancel }: P
     setTimeout(() => {
       onComplete(practiceResults);
     }, 1000);
-  }, [isCompleting, calculateStatistics, testType, statistics, timeRemaining, testRows, currentContent, inputText, typedText, currentRowIndex, onComplete]);
+  }, [isCompleting, testType, timeRemaining, testRows, currentContent, inputText, typedText, currentRowIndex, allEntryLines, onComplete]);
 
   // Handle row completion for 10-key tests (called after animation completes)
   const handleRowComplete = useCallback(() => {
@@ -855,6 +923,53 @@ export default function PracticeTypingTest({ testType, onComplete, onCancel }: P
     }
   };
 
+  // Handle focus loss for 10-key tests
+  const handleInputBlur = useCallback(() => {
+    if (testType === '10-key' && hasStarted && !isPaused && !isCompleting) {
+      // Pause test when focus is lost
+      setIsPaused(true);
+      setInputHasFocus(false);
+      
+      // Clear timers
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (statsIntervalRef.current) clearInterval(statsIntervalRef.current);
+      
+      toast('Practice paused - input lost focus', {
+        duration: 2000,
+        icon: '⏸️'
+      });
+    }
+  }, [testType, hasStarted, isPaused, isCompleting]);
+
+  // Handle focus gain for 10-key tests
+  const handleInputFocus = useCallback(() => {
+    setInputHasFocus(true);
+    
+    if (testType === '10-key' && hasStarted && isPaused && !isCompleting) {
+      // Resume test when focus is regained
+      resumeTest();
+    }
+    
+    // For 10-key tests, always ensure cursor is at end
+    if (testType === '10-key' && inputRef.current) {
+      const textarea = inputRef.current;
+      setTimeout(() => {
+        textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+      }, 0);
+    }
+  }, [testType, hasStarted, isPaused, isCompleting, resumeTest]);
+
+  // Prevent manual cursor repositioning for 10-key tests
+  const handleTextareaClick = useCallback((e: React.MouseEvent<HTMLTextAreaElement>) => {
+    if (testType === '10-key' && inputRef.current) {
+      e.preventDefault();
+      const textarea = inputRef.current;
+      setTimeout(() => {
+        textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+      }, 0);
+    }
+  }, [testType]);
+
   // Handle key press for start trigger
   const handleKeyDown = (e: React.KeyboardEvent) => {
     // Start test when spacebar or enter is pressed
@@ -867,6 +982,27 @@ export default function PracticeTypingTest({ testType, onComplete, onCancel }: P
     // For 10-key tests, all keyboard handling is done through the global event listener
     // For regular typing tests, let the default behavior handle input
   };
+
+  // Prevent arrow key cursor movement for 10-key tests
+  const handleTextareaKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (testType === '10-key') {
+      const isArrowKey = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(e.key);
+      if (isArrowKey) {
+        e.preventDefault();
+        // Keep cursor at end
+        if (inputRef.current) {
+          const textarea = inputRef.current;
+          setTimeout(() => {
+            textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+          }, 0);
+        }
+        return;
+      }
+    }
+    
+    // Also call the original keydown handler
+    handleKeyDown(e);
+  }, [testType]);
 
   // Prevent clicking outside text area
   const preventClick = (e: React.MouseEvent) => {
@@ -1085,9 +1221,10 @@ export default function PracticeTypingTest({ testType, onComplete, onCancel }: P
                 ref={inputRef}
                 value={allEntryLines.join('\n')}
                 onChange={handleTextChange}
-                onKeyDown={handleKeyDown}
-                onFocus={() => setInputHasFocus(true)}
-                onBlur={() => setInputHasFocus(false)}
+                onKeyDown={handleTextareaKeyDown}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                onClick={handleTextareaClick}
                 disabled={isCompleting || !numLockEnabled || isPaused}
                 className={`w-full h-40 p-4 border-2 rounded-lg font-mono text-lg resize-none focus:outline-none focus:ring-2 transition-all cursor-text ${
                   numLockEnabled && !isPaused
@@ -1098,7 +1235,7 @@ export default function PracticeTypingTest({ testType, onComplete, onCancel }: P
                   !hasStarted 
                     ? (inputHasFocus ? "Press SPACEBAR or ENTER to start practicing..." : "Click HERE and start typing numbers")
                     : isPaused 
-                    ? "Test paused - enable Num Lock to continue..."
+                    ? "Test paused - click to resume..."
                     : "Use number pad to type..."
                 }
                 autoComplete="off"
